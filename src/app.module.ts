@@ -20,6 +20,7 @@ import { CatsModule } from './cat/cat.module';
         }
       },
     }),
+    CatsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
