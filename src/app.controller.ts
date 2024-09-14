@@ -1,6 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Question } from './schemas/question.schema';
+import { QuestionDetail } from './schemas/question.detail.schema';
 
 @Controller()
 export class AppController {
@@ -14,5 +15,10 @@ export class AppController {
   @Get('questions')
   async findAll(): Promise<Question[]> {
     return this.appService.findAll();
+  }
+
+  @Get('questions/:id')
+  async findQuestionDetails(@Param('id') uid: string): Promise<QuestionDetail> {
+    return this.appService.findQuestionDetails(uid);
   }
 }
