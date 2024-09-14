@@ -1,7 +1,9 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Question } from './schemas/question.schema';
 import { QuestionDetail } from './schemas/question.detail.schema';
+
+const allowedUids = ['validate-subsequence', 'river-sizes', 'shift-linked-list', 'max-profit-with-k-transactions']
 
 @Controller()
 export class AppController {
@@ -19,6 +21,7 @@ export class AppController {
 
   @Get('questions/:id')
   async findQuestionDetails(@Param('id') uid: string): Promise<QuestionDetail> {
+    if (!allowedUids.includes(uid)) throw new NotFoundException('Question not found')
     return this.appService.findQuestionDetails(uid);
   }
 }
