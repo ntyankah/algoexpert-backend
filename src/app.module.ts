@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CatsModule } from './cat/cat.module';
+import { Question, QuestionSchema } from './schemas/question.schema';
+import { QuestionDetail, QuestionDetailSchema } from './schemas/question.detail.schema';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { CatsModule } from './cat/cat.module';
         }
       },
     }),
+    MongooseModule.forFeature([{ name: Question.name, schema: QuestionSchema, collection: 'question' }]),
+    MongooseModule.forFeature([{ name: QuestionDetail.name, schema: QuestionDetailSchema, collection: 'question_detail' }]),
     CatsModule,
   ],
   controllers: [AppController],
