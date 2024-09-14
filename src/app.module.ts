@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CatsModule } from './cat/cat.module';
+import { Question, QuestionSchema } from './schemas/question.schema';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CatsModule } from './cat/cat.module';
         }
       },
     }),
+    MongooseModule.forFeature([{ name: Question.name, schema: QuestionSchema, collection: 'question' }]),
     CatsModule,
   ],
   controllers: [AppController],
